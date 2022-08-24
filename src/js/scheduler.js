@@ -317,9 +317,9 @@
         options.TIME_TITLE, // title: time
         options.WEEK_TITLE, // title: week
         me.options.accuracy * 12, // row span
-        options.AM, // title: 上午
+        options.AM,
         me.options.accuracy * 12, // row span
-        options.PM // title: 下午
+        options.PM
       )
     );
 
@@ -492,6 +492,15 @@
     this.$body.html(this.getBodyHtml(data));
   };
 
+  // setter in jquery :
+  // $('#mydiv').attr("data-myval","20"); =>
+
+  // $("body").attr(function (data) {
+  //   this.$body.html(this.getBodyHtml(data));
+  // });
+  
+  //setter
+
   proto.end = function () {
     this.data = this.cache;
     this.cache = null;
@@ -585,14 +594,13 @@
   };
 
   /**
-   * @param {Array} startCoord 起始坐标 [row, col]
+   * @param {Array} startCoord  [row, col]
    * @return {SelectMode}
    */
   proto.getCellSelectMode = function (coord) {
     if (!this.options.multiple) {
       return SelectMode.REPLACE;
     }
-    // TODO 未过滤 disabled 的格子
     var day = this.data[coord[0]];
     return day && ~day.indexOf(coord[1]) ? SelectMode.MINUS : SelectMode.JOIN;
   };
