@@ -293,9 +293,9 @@
     me.$body.on("click", ".scheduler-day-toggle", me.onToggleDay.bind(me));
     // range toggle select hour
     me.$body
-      .on("mousedown", ".scheduler-hour", me.onMouseDown.bind(me))
-      .on("mousemove", ".scheduler-hour", me.onMouseMove.bind(me))
-      .on("mouseup", ".scheduler-hour", me.onMouseUp.bind(me));
+      .on("touchstart mousedown", ".scheduler-hour", me.onMouseDown.bind(me))
+      .on("touchmove mousemove", ".scheduler-hour", me.onMouseMove.bind(me))
+      .on("touchend mouseup", ".scheduler-hour", me.onMouseUp.bind(me));
   };
 
   proto.initFoot = function () {
@@ -498,7 +498,7 @@
   // $("body").attr(function (data) {
   //   this.$body.html(this.getBodyHtml(data));
   // });
-  
+
   //setter
 
   proto.end = function () {
