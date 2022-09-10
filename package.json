@@ -1,6 +1,6 @@
 {
-  "name": "weekday-timesheet",
-  "version": "0.0.1",
+  "name": "timesheet-of-weekday",
+  "version": "0.1.0",
   "description": "a weekday timesheet",
   "main": "index.js",
   "scripts": {
