@@ -227,7 +227,6 @@
   };
 
   var proto = Scheduler.prototype;
-
   proto.init = function () {
     this.initLocale();
     this.initTable();
@@ -487,19 +486,46 @@
   /**
    *
    * @param {Object} data
+   * @param {Array} list
+   * @return {Array}
+   *
    */
+
   proto.update = function (data) {
+    let list = [];
+    Object.entries(data).map(([key, value]) => {
+      const size = value.length;
+      let times = [];
+      let st = (end = value[0]);
+      for (let i = 1; i <= size; i++) {
+        let dist = value[i] - value[i - 1];
+        if (dist === 1) {
+          end++;
+        } else {
+          times.push({
+            startHour: st,
+            endHour: end + 1,
+            active: true,
+          });
+          st = end = value[i];
+        }
+      }
+      if (st)
+        times.push({
+          startHour: st,
+          endHour: end + 1,
+          active: true,
+        });
+
+      list.push({
+        dayOfWeek: key - 1,
+        times: times,
+      });
+    });
+
+    document.getElementById("qwpaksowmasj").value = JSON.stringify(list);
     this.$body.html(this.getBodyHtml(data));
   };
-
-  // setter in jquery :
-  // $('#mydiv').attr("data-myval","20"); =>
-
-  // $("body").attr(function (data) {
-  //   this.$body.html(this.getBodyHtml(data));
-  // });
-
-  //setter
 
   proto.end = function () {
     this.data = this.cache;
@@ -527,7 +553,6 @@
    */
   proto.merge = function (origin, current, selectMode) {
     var res = {};
-
     if (selectMode === SelectMode.REPLACE) {
       for (var i = 1; i <= 7; i++) {
         if (current[i] && current[i].length) {
@@ -589,7 +614,6 @@
         }
       }
     }
-
     return total === used ? SelectMode.MINUS : SelectMode.JOIN;
   };
 
