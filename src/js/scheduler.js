@@ -496,7 +496,8 @@
     Object.entries(data).map(([key, value]) => {
       const size = value.length;
       let times = [];
-      let st = (end = value[0]);
+      let st = value[0];
+      let end = value[0];
       for (let i = 1; i <= size; i++) {
         let dist = value[i] - value[i - 1];
         if (dist === 1) {
